@@ -13,6 +13,7 @@ import AlamofireImage
 class RepoListUserCell: RxReusableTableViewCell {
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     
@@ -44,9 +45,14 @@ class RepoListUserCell: RxReusableTableViewCell {
     }
 
     private func bindViewModel() {
-        viewModel.userName
+        viewModel.name
             .asDriver(onErrorJustReturn: "-")
             .drive(nameLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        viewModel.fullName
+            .asDriver(onErrorJustReturn: "()")
+            .drive(fullNameLabel.rx.text)
             .disposed(by: disposeBag)
 
         viewModel.avatarUrl

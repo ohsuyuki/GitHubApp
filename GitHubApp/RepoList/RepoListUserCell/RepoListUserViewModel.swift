@@ -15,7 +15,8 @@ protocol RepoListUserViewModelInputs {
 }
 
 protocol RepoListUserViewModelOutputs {
-    var userName: Observable<String> { get }
+    var name: Observable<String> { get }
+    var fullName: Observable<String> { get }
     var avatarUrl: Observable<URL?> { get }
     var followers: Observable<String> { get }
     var following: Observable<String> { get }
@@ -26,7 +27,8 @@ typealias RepoListUserViewModelType = RepoListUserViewModelInputs & RepoListUser
 // MARK: ViewModel
 class RepoListUserViewModel: RepoListUserViewModelType {
     let configureProperty = PublishSubject<Void>()
-    let userName: Observable<String>
+    let name: Observable<String>
+    let fullName: Observable<String>
     var avatarUrl: Observable<URL?>
     let followers: Observable<String>
     let following: Observable<String>
@@ -38,7 +40,7 @@ class RepoListUserViewModel: RepoListUserViewModelType {
         let observableUser = Observable.just(user)
             .share(replay: 1)
 
-        userName = observableUser
+        name = observableUser
             .map { $0.login }
 
         avatarUrl = observableUser
@@ -47,6 +49,9 @@ class RepoListUserViewModel: RepoListUserViewModelType {
         let userDetail = configureProperty
             .flatMap { client.call(endpoint: user.url, responseType: UserDetail.self) }
             .share(replay: 1)
+
+        fullName = userDetail
+            .map { "(\($0.name))" }
 
         followers = userDetail
             .map { String($0.followers) }

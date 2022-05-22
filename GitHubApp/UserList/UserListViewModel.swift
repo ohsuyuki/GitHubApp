@@ -25,10 +25,10 @@ class UserListViewModel: UserListViewModelType {
     let users: Observable<[User]>
     let viewDidLoadProperty = PublishSubject<Void>()
 
-    init(usersRepository: GitHubUsersRepositoryType = GitHubUsersRepository()) {
+    init(client: GitHubApiClientType = GitHubApiClient()) {
         users = viewDidLoadProperty
             .flatMap {
-                return usersRepository.listUsers()
+                return client.call(endpoint: "https://api.github.com/users", responseType: [User].self)
             }
             .asObservable()
     }

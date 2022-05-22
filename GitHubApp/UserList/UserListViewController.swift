@@ -8,43 +8,6 @@
 import UIKit
 import RxSwift
 
-class UsersDataSource: NSObject, UITableViewDataSource {
-    struct Cell {
-        static let userCell = "UserCell"
-    }
-
-    private (set) var users: [User] = []
-
-    func configure(_ tableView: UITableView) {
-        tableView.register(UINib(nibName: Cell.userCell, bundle: nil), forCellReuseIdentifier: Cell.userCell)
-    }
-
-    func update(_ tableView: UITableView, users: [User]) {
-        self.users = users
-
-        tableView.reloadData()
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard 0..<users.count ~= indexPath.row else {
-            fatalError("IndexPath.row out of range (\(#function))")
-        }
-
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Cell.userCell, for: indexPath) as? UserCell else {
-            fatalError("Unexpected error occurred")
-        }
-
-        let user = users[indexPath.row]
-        cell.configure(user: user)
-        
-        return cell
-    }
-}
-
 class UserListViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
 
@@ -62,14 +25,14 @@ class UserListViewController: UIViewController, UITableViewDelegate {
         viewModel.viewDidLoad()
     }
 
-    func configureTableView() {
+    private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = dataSource
 
         dataSource.configure(tableView)
     }
 
-    func bindViewModel() {
+    private func bindViewModel() {
         viewModel.users
             .subscribe(
                 onNext: { [weak self] users in
@@ -92,21 +55,54 @@ class UserListViewController: UIViewController, UITableViewDelegate {
 
         let user = dataSource.users[indexPath.row]
 
-        toRepositoryListView(user: user)
+        toRepoListView(user: user)
     }
 
-    func toRepositoryListView(user: User) {
-        let storyboard = UIStoryboard(name: "RepositoryList", bundle: nil)
-//        guard let viewController = storyboard.instantiateInitialViewController() as? ConfigurableView<ChatViewConfig> else {
-//            return
-//        }
-
-//        let config = ChatViewConfig(opponentName: user.name)
-//        viewController.configure(config)
-        guard let viewController = storyboard.instantiateInitialViewController() else {
+    private func toRepoListView(user: User) {
+        let storyboard = UIStoryboard(name: "RepoList", bundle: nil)
+        guard let viewController = storyboard.instantiateInitialViewController() as? RepoListViewController else {
             return
         }
 
+        viewController.setUp(user: user)
+
         navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+class UsersDataSource: NSObject, UITableViewDataSource {
+    struct Cell {
+        static let userCell = "UserCell"
+    }
+
+    private (set) var users: [User] = []
+
+    func configure(_ tableView: UITableView) {
+        tableView.register(UINib(nibName: Cell.userCell, bundle: nil), forCellReuseIdentifier: Cell.userCell)
+    }
+
+    func update(_ tableView: UITableView, users: [User]) {
+        self.users.append(contentsOf: users)
+
+        tableView.reloadData()
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return users.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard 0..<users.count ~= indexPath.row else {
+            fatalError("IndexPath.row out of range (\(#function))")
+        }
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Cell.userCell, for: indexPath) as? UserCell else {
+            fatalError("Unexpected error occurred")
+        }
+
+        let user = users[indexPath.row]
+        cell.configure(user: user)
+
+        return cell
     }
 }

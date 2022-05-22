@@ -10,4 +10,7 @@ import Foundation
 struct Repo: Decodable {
     let name: String
     let htmlUrl: String
+    let description: String?
+    let stargazersCount: Int
+    let language: String?
 }

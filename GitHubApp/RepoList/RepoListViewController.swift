@@ -56,8 +56,16 @@ class RepoListViewController: UIViewController, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
+        guard let section = dataSource.sections[safe: indexPath.section] else {
+            fatalError("indexPath.row out of range (\(#function))")
+        }
+
+        guard section == .repo else {
+            return
+        }
+
         guard let repo = dataSource.repos[safe: indexPath.row] else {
-            fatalError("IndexPath.row out of range (\(#function))")
+            fatalError("indexPath.row out of range (\(#function))")
         }
 
         toRepoView(repo: repo)
@@ -90,7 +98,7 @@ class RepoListDataSource: NSObject, UITableViewDataSource {
         static let repoCell = "RepoCell"
     }
 
-    private let sections: [Section] = [
+    let sections: [Section] = [
         .user,
         .repo
     ]

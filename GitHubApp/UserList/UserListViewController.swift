@@ -49,11 +49,9 @@ class UserListViewController: UIViewController, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        guard 0..<dataSource.users.count ~= indexPath.row else {
+        guard let user = dataSource.users[safe: indexPath.row] else {
             fatalError("IndexPath.row out of range (\(#function))")
         }
-
-        let user = dataSource.users[indexPath.row]
 
         toRepoListView(user: user)
     }
@@ -92,7 +90,7 @@ class UsersDataSource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard 0..<users.count ~= indexPath.row else {
+        guard let user = users[safe: indexPath.row] else {
             fatalError("IndexPath.row out of range (\(#function))")
         }
 
@@ -100,9 +98,7 @@ class UsersDataSource: NSObject, UITableViewDataSource {
             fatalError("Unexpected error occurred")
         }
 
-        let user = users[indexPath.row]
         cell.configure(user: user)
-
         return cell
     }
 }

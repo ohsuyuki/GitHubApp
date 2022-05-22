@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import SwiftUI
+import WebKit
 
 class RepoListViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -50,6 +51,31 @@ class RepoListViewController: UIViewController, UITableViewDelegate {
                 }
             )
             .disposed(by: disposeBag)
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        guard let repo = dataSource.repos[safe: indexPath.row] else {
+            fatalError("IndexPath.row out of range (\(#function))")
+        }
+
+        toRepoView(repo: repo)
+    }
+
+    private func toRepoView(repo: Repo) {
+        guard let url = URL(string: repo.htmlUrl) else {
+            return
+        }
+
+        let storyboard = UIStoryboard(name: "WebView", bundle: nil)
+        guard let viewController = storyboard.instantiateInitialViewController() as? WebViewController else {
+            return
+        }
+
+        viewController.setUp(url: url)
+
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -111,11 +137,11 @@ class RepoListDataSource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard 0..<sections.count ~= section else {
+        guard let sectionType = sections[safe: section] else {
             fatalError("section out of range (\(#function))")
         }
 
-        switch sections[section] {
+        switch sectionType {
         case .user:
             return 1
         case .repo:
@@ -124,11 +150,11 @@ class RepoListDataSource: NSObject, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard 0..<sections.count ~= indexPath.section else {
+        guard let section = sections[safe: indexPath.section] else {
             fatalError("indexPath.section out of range (\(#function))")
         }
 
-        switch sections[indexPath.section] {
+        switch section {
         case .user:
             return userCell(tableView, cellForRowAt: indexPath)
         case .repo:
@@ -136,7 +162,7 @@ class RepoListDataSource: NSObject, UITableViewDataSource {
         }
     }
 
-    func userCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    private func userCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard indexPath.row == 0 else {
             fatalError("indexPath.row out of range (\(#function))")
         }
@@ -149,8 +175,8 @@ class RepoListDataSource: NSObject, UITableViewDataSource {
         return cell
     }
 
-    func repoCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard 0..<repos.count ~= indexPath.row else {
+    private func repoCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let repo = repos[safe: indexPath.row] else {
             fatalError("indexPath.row out of range (\(#function))")
         }
 
@@ -158,7 +184,6 @@ class RepoListDataSource: NSObject, UITableViewDataSource {
             fatalError("Unexpected error occurred")
         }
 
-        let repo = repos[indexPath.row]
         cell.configure(repo: repo)
         return cell
     }

@@ -182,10 +182,10 @@
 		54D81D642839089E007942BA /* UserList */ = {
 			isa = PBXGroup;
 			children = (
-				54D81D7C2839E3F6007942BA /* UserCell */,
 				54D81D3A283907AA007942BA /* UserList.storyboard */,
 				54D81D38283907AA007942BA /* UserListViewController.swift */,
 				54D81D65283908D0007942BA /* UserListViewModel.swift */,
+				54D81D7C2839E3F6007942BA /* UserCell */,
 			);
 			path = UserList;
 			sourceTree = "<group>";
@@ -193,12 +193,11 @@
 		54D81D792839E357007942BA /* RepoList */ = {
 			isa = PBXGroup;
 			children = (
-				54D81DA7283A3B04007942BA /* RepoListUserCell */,
 				54D81D7A2839E3A0007942BA /* RepoList.storyboard */,
 				54D81D7D2839E923007942BA /* RepoListViewController.swift */,
 				54D81D7F2839E965007942BA /* RepoListViewModel.swift */,
-				54D81D97283A0062007942BA /* RepoCell.swift */,
-				54D81D98283A0062007942BA /* RepoCell.xib */,
+				54D81DA7283A3B04007942BA /* RepoListUserCell */,
+				54D81DB0283A4DDD007942BA /* RepoCell */,
 			);
 			path = RepoList;
 			sourceTree = "<group>";
@@ -243,8 +242,8 @@
 		54D81D9E283A1B83007942BA /* WebView */ = {
 			isa = PBXGroup;
 			children = (
-				54D81DA3283A1BEF007942BA /* WebViewController.swift */,
 				54D81DA5283A1CE9007942BA /* WebView.storyboard */,
+				54D81DA3283A1BEF007942BA /* WebViewController.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -252,8 +251,8 @@
 		54D81DA7283A3B04007942BA /* RepoListUserCell */ = {
 			isa = PBXGroup;
 			children = (
-				54D81D912839FF29007942BA /* RepoListUserCell.swift */,
 				54D81D922839FF29007942BA /* RepoListUserCell.xib */,
+				54D81D912839FF29007942BA /* RepoListUserCell.swift */,
 				54D81DA8283A3B3F007942BA /* RepoListUserViewModel.swift */,
 			);
 			path = RepoListUserCell;
@@ -273,6 +272,15 @@
 				54D81DAC283A49B5007942BA /* RxReusableTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		54D81DB0283A4DDD007942BA /* RepoCell */ = {
+			isa = PBXGroup;
+			children = (
+				54D81D98283A0062007942BA /* RepoCell.xib */,
+				54D81D97283A0062007942BA /* RepoCell.swift */,
+			);
+			path = RepoCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

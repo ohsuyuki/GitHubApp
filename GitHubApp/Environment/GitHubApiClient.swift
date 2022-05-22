@@ -15,6 +15,7 @@ enum GitHubApiClientError: Error {
 
 protocol GitHubApiClientType {
     func call<T: Decodable>(endpoint: String, responseType: T.Type) -> Single<T>
+    func call<T: Decodable>(endpoint: String, responseType: T.Type, parameters: [String: Any]?) -> Single<T>
 }
 
 class GitHubApiClient: GitHubApiClientType {
@@ -38,13 +39,17 @@ class GitHubApiClient: GitHubApiClientType {
     }
 
     func call<T: Decodable>(endpoint: String, responseType: T.Type) -> Single<T> {
+        return call(endpoint: endpoint, responseType: responseType, parameters: nil)
+    }
+
+    func call<T: Decodable>(endpoint: String, responseType: T.Type, parameters: [String: Any]?) -> Single<T> {
         return Single.create { [weak self] observer in
             guard let self = self else {
                 observer(.failure(GitHubApiClientError.unknownError))
                 return Disposables.create()
             }
 
-            AF.request(endpoint, headers: self.headers)
+            AF.request(endpoint, parameters: parameters, headers: self.headers)
                 .responseDecodable(
                     of: responseType,
                     decoder: self.decoder

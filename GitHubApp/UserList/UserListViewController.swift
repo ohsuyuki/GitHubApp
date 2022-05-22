@@ -56,6 +56,14 @@ class UserListViewController: UIViewController, UITableViewDelegate {
         toRepoListView(user: user)
     }
 
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard dataSource.users.count - 10 == indexPath.row else {
+            return
+        }
+
+        viewModel.loadMore(users: dataSource.users)
+    }
+
     private func toRepoListView(user: User) {
         let storyboard = UIStoryboard(name: "RepoList", bundle: nil)
         guard let viewController = storyboard.instantiateInitialViewController() as? RepoListViewController else {

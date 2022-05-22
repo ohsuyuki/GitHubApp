@@ -13,4 +13,5 @@ struct Repo: Decodable {
     let description: String?
     let stargazersCount: Int
     let language: String?
+    let fork: Bool
 }

@@ -31,6 +31,7 @@ class RepoListViewModel: RepoListViewModelType {
     ) {
         repos = viewDidLoadProperty
             .flatMap { client.call(endpoint: user.reposUrl, responseType: [Repo].self) }
+            .map { $0.filter { !$0.fork } }
     }
 
     func viewDidLoad() {

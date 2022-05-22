@@ -40,6 +40,7 @@
 		54D81DA9283A3B3F007942BA /* RepoListUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D81DA8283A3B3F007942BA /* RepoListUserViewModel.swift */; };
 		54D81DAB283A3C71007942BA /* UserDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D81DAA283A3C71007942BA /* UserDetail.swift */; };
 		54D81DAD283A49B5007942BA /* RxReusableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D81DAC283A49B5007942BA /* RxReusableTableViewCell.swift */; };
+		54D81DB3283A5266007942BA /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 54D81DB2283A5266007942BA /* AlamofireImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 			files = (
 				54D81D6D28390AF6007942BA /* RxSwift in Frameworks */,
 				54D81D7028391182007942BA /* Alamofire in Frameworks */,
+				54D81DB3283A5266007942BA /* AlamofireImage in Frameworks */,
 				54D81D6B28390AF6007942BA /* RxRelay in Frameworks */,
 				54D81D6928390AF6007942BA /* RxCocoa in Frameworks */,
 			);
@@ -304,6 +306,7 @@
 				54D81D6A28390AF6007942BA /* RxRelay */,
 				54D81D6C28390AF6007942BA /* RxSwift */,
 				54D81D6F28391182007942BA /* Alamofire */,
+				54D81DB2283A5266007942BA /* AlamofireImage */,
 			);
 			productName = GitHubApp;
 			productReference = 54D81D31283907AA007942BA /* GitHubApp.app */;
@@ -380,6 +383,7 @@
 			packageReferences = (
 				54D81D6728390AF5007942BA /* XCRemoteSwiftPackageReference "RxSwift" */,
 				54D81D6E28391182007942BA /* XCRemoteSwiftPackageReference "Alamofire" */,
+				54D81DB1283A5266007942BA /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 			);
 			productRefGroup = 54D81D32283907AA007942BA /* Products */;
 			projectDirPath = "";
@@ -806,6 +810,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		54D81DB1283A5266007942BA /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -828,6 +840,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 54D81D6E28391182007942BA /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		54D81DB2283A5266007942BA /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54D81DB1283A5266007942BA /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

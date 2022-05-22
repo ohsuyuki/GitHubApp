@@ -8,13 +8,21 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import AlamofireImage
 
 class RepoListUserCell: RxReusableTableViewCell {
+    @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     
     private var viewModel: RepoListUserViewModelType!
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        avatarImage.layer.cornerRadius = avatarImage.bounds.height / 2.0
+    }
 
     func configure(user: User, with viewModelInjection: RepoListUserViewModelType? = nil) {
         configureViewModel(
@@ -34,11 +42,25 @@ class RepoListUserCell: RxReusableTableViewCell {
             self.viewModel = RepoListUserViewModel(user: user)
         }
     }
-    
+
     private func bindViewModel() {
         viewModel.userName
             .asDriver(onErrorJustReturn: "-")
             .drive(nameLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        viewModel.avatarUrl
+            .asDriver(onErrorJustReturn: nil)
+            .drive(onNext: { [weak self] avatarUrl in
+                guard let self = self, let avatarUrl = avatarUrl else {
+                    return
+                }
+
+                self.avatarImage.af.setImage(
+                    withURL: avatarUrl,
+                    placeholderImage: self.avatarImage.image
+                )
+            })
             .disposed(by: disposeBag)
 
         viewModel.followers

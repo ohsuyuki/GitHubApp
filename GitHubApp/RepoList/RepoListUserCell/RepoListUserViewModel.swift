@@ -16,6 +16,7 @@ protocol RepoListUserViewModelInputs {
 
 protocol RepoListUserViewModelOutputs {
     var userName: Observable<String> { get }
+    var avatarUrl: Observable<URL?> { get }
     var followers: Observable<String> { get }
     var following: Observable<String> { get }
 }
@@ -26,6 +27,7 @@ typealias RepoListUserViewModelType = RepoListUserViewModelInputs & RepoListUser
 class RepoListUserViewModel: RepoListUserViewModelType {
     let configureProperty = PublishSubject<Void>()
     let userName: Observable<String>
+    var avatarUrl: Observable<URL?>
     let followers: Observable<String>
     let following: Observable<String>
 
@@ -33,8 +35,14 @@ class RepoListUserViewModel: RepoListUserViewModelType {
         user: User,
         client: GitHubApiClientType = GitHubApiClient()
     ) {
-        userName = Observable.just(user)
+        let observableUser = Observable.just(user)
+            .share(replay: 1)
+
+        userName = observableUser
             .map { $0.login }
+
+        avatarUrl = observableUser
+            .map { URL(string: $0.avatarUrl) }
 
         let userDetail = configureProperty
             .flatMap { client.call(endpoint: user.url, responseType: UserDetail.self) }

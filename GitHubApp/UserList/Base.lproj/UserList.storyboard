@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--User List View Controller-->
+        <!--GitHub Users-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="UserListViewController" customModule="GitHubApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -30,7 +30,7 @@
                             <constraint firstItem="OhI-Lm-LdK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aMj-8e-tvY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Hld-sT-B5s"/>
+                    <navigationItem key="navigationItem" title="GitHub Users" id="Hld-sT-B5s"/>
                     <connections>
                         <outlet property="tableView" destination="OhI-Lm-LdK" id="yY1-on-D7U"/>
                     </connections>

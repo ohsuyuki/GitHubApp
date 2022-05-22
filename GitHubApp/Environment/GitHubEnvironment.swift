@@ -13,5 +13,5 @@ protocol GitHubEnvironmentType {
 }
 
 class GitHubEnvironment: GitHubEnvironmentType {
-    let authorization: String = "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"
+    let authorization: String = "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"
 }

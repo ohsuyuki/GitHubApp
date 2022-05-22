@@ -19,7 +19,6 @@ class WebViewController: UIViewController {
     }
 
     func setUp(url: URL) {
-        print("[test] \(url)")
         self.url = url
     }
 }

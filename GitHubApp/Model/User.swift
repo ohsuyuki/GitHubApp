@@ -10,4 +10,5 @@ import Foundation
 struct User: Codable {
     let login: String
     let reposUrl: String
+    let url: String
 }

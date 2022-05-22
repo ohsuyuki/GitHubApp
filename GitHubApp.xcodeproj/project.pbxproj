@@ -37,6 +37,9 @@
 		54D81D9D283A1998007942BA /* Array+safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D81D9C283A1998007942BA /* Array+safe.swift */; };
 		54D81DA4283A1BEF007942BA /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D81DA3283A1BEF007942BA /* WebViewController.swift */; };
 		54D81DA6283A1CE9007942BA /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54D81DA5283A1CE9007942BA /* WebView.storyboard */; };
+		54D81DA9283A3B3F007942BA /* RepoListUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D81DA8283A3B3F007942BA /* RepoListUserViewModel.swift */; };
+		54D81DAB283A3C71007942BA /* UserDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D81DAA283A3C71007942BA /* UserDetail.swift */; };
+		54D81DAD283A49B5007942BA /* RxReusableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D81DAC283A49B5007942BA /* RxReusableTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +90,9 @@
 		54D81D9C283A1998007942BA /* Array+safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+safe.swift"; sourceTree = "<group>"; };
 		54D81DA3283A1BEF007942BA /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		54D81DA5283A1CE9007942BA /* WebView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WebView.storyboard; sourceTree = "<group>"; };
+		54D81DA8283A3B3F007942BA /* RepoListUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoListUserViewModel.swift; sourceTree = "<group>"; };
+		54D81DAA283A3C71007942BA /* UserDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetail.swift; sourceTree = "<group>"; };
+		54D81DAC283A49B5007942BA /* RxReusableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxReusableTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,11 +193,10 @@
 		54D81D792839E357007942BA /* RepoList */ = {
 			isa = PBXGroup;
 			children = (
+				54D81DA7283A3B04007942BA /* RepoListUserCell */,
 				54D81D7A2839E3A0007942BA /* RepoList.storyboard */,
 				54D81D7D2839E923007942BA /* RepoListViewController.swift */,
 				54D81D7F2839E965007942BA /* RepoListViewModel.swift */,
-				54D81D912839FF29007942BA /* RepoListUserCell.swift */,
-				54D81D922839FF29007942BA /* RepoListUserCell.xib */,
 				54D81D97283A0062007942BA /* RepoCell.swift */,
 				54D81D98283A0062007942BA /* RepoCell.xib */,
 			);
@@ -212,6 +217,7 @@
 			children = (
 				54D81D732839385C007942BA /* User.swift */,
 				54D81D8D2839F7CB007942BA /* Repo.swift */,
+				54D81DAA283A3C71007942BA /* UserDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -228,7 +234,8 @@
 		54D81D9B283A1976007942BA /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				54D81D9C283A1998007942BA /* Array+safe.swift */,
+				54D81DAF283A4CD9007942BA /* View */,
+				54D81DAE283A4CBD007942BA /* Extension */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -240,6 +247,32 @@
 				54D81DA5283A1CE9007942BA /* WebView.storyboard */,
 			);
 			path = WebView;
+			sourceTree = "<group>";
+		};
+		54D81DA7283A3B04007942BA /* RepoListUserCell */ = {
+			isa = PBXGroup;
+			children = (
+				54D81D912839FF29007942BA /* RepoListUserCell.swift */,
+				54D81D922839FF29007942BA /* RepoListUserCell.xib */,
+				54D81DA8283A3B3F007942BA /* RepoListUserViewModel.swift */,
+			);
+			path = RepoListUserCell;
+			sourceTree = "<group>";
+		};
+		54D81DAE283A4CBD007942BA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				54D81D9C283A1998007942BA /* Array+safe.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		54D81DAF283A4CD9007942BA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				54D81DAC283A49B5007942BA /* RxReusableTableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -391,13 +424,16 @@
 				54D81D8E2839F7CB007942BA /* Repo.swift in Sources */,
 				54D81D8B2839EEC0007942BA /* GitHubApiClient.swift in Sources */,
 				54D81D932839FF29007942BA /* RepoListUserCell.swift in Sources */,
+				54D81DA9283A3B3F007942BA /* RepoListUserViewModel.swift in Sources */,
 				54D81D7E2839E923007942BA /* RepoListViewController.swift in Sources */,
 				54D81D9D283A1998007942BA /* Array+safe.swift in Sources */,
 				54D81D39283907AA007942BA /* UserListViewController.swift in Sources */,
+				54D81DAD283A49B5007942BA /* RxReusableTableViewCell.swift in Sources */,
 				54D81D99283A0062007942BA /* RepoCell.swift in Sources */,
 				54D81D882839ED1D007942BA /* GitHubEnvironment.swift in Sources */,
 				54D81D66283908D0007942BA /* UserListViewModel.swift in Sources */,
 				54D81D742839385C007942BA /* User.swift in Sources */,
+				54D81DAB283A3C71007942BA /* UserDetail.swift in Sources */,
 				54D81D35283907AA007942BA /* AppDelegate.swift in Sources */,
 				54D81D802839E965007942BA /* RepoListViewModel.swift in Sources */,
 				54D81D37283907AA007942BA /* SceneDelegate.swift in Sources */,

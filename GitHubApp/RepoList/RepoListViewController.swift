@@ -124,7 +124,7 @@ class RepoListDataSource: NSObject, UITableViewDataSource {
         }
 
         tableView.beginUpdates()
-        tableView.reloadSections(IndexSet([index]), with: .top)
+        tableView.reloadSections(IndexSet([index]), with: .none)
         tableView.endUpdates()
     }
 
@@ -136,12 +136,25 @@ class RepoListDataSource: NSObject, UITableViewDataSource {
         self.repos.append(contentsOf: repos)
 
         tableView.beginUpdates()
-        tableView.reloadSections(IndexSet([index]), with: .bottom)
+        tableView.reloadSections(IndexSet([index]), with: .none)
         tableView.endUpdates()
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sectionType = sections[safe: section] else {
+            fatalError("section out of range (\(#function))")
+        }
+
+        switch sectionType {
+        case .user:
+            return nil
+        case .repo:
+            return repos.count > 0 ? "Repositories" : nil
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

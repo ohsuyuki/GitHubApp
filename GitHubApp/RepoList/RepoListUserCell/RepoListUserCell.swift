@@ -23,6 +23,8 @@ class RepoListUserCell: RxReusableTableViewCell {
         super.layoutSubviews()
 
         avatarImage.layer.cornerRadius = avatarImage.bounds.height / 2.0
+
+        separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
     }
 
     func configure(user: User, with viewModelInjection: RepoListUserViewModelType? = nil) {

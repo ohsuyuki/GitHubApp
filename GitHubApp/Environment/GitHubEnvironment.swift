@@ -9,9 +9,11 @@ import Foundation
 
 // MARK: Environment
 protocol GitHubEnvironmentType {
-    var authorization: String { get }
+    var accessToken: String? { get }
 }
 
 class GitHubEnvironment: GitHubEnvironmentType {
-    let authorization: String = "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"
+    var accessToken: String? {
+        return ProcessInfo.processInfo.environment["ACCESS_TOKEN"]
+    }
 }

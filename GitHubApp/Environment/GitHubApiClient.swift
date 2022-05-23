@@ -28,10 +28,15 @@ class GitHubApiClient: GitHubApiClientType {
     }
 
     private var headers: HTTPHeaders {
-        return [
-            "Authorization": "Bearer \(self.environment.authorization)",
+        var headers: HTTPHeaders = [
             "Accept": "application/json"
         ]
+
+        if let accessToken = environment.accessToken {
+            headers.add(name: "Authorization", value: "Bearer \(accessToken)")
+        }
+
+        return headers
     }
 
     init(environment: GitHubEnvironmentType = GitHubEnvironment()) {

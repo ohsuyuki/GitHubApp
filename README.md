@@ -23,7 +23,7 @@ https://user-images.githubusercontent.com/27656410/169704473-ad1bcac8-ff27-4058-
   - モデル
 
 - Environment
-  - 各画面や機能で依存する（共通利用する）クラスやデータ。
+  - 各画面や機能で依存する（共通利用する）クラスやデータ。APIクライアントなど。
 
 - Common
   - 各画面や機能で共通利用するExtensionや便利系のBaseクラスなど。
